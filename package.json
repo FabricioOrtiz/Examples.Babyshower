@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/netlify": "^6.2.4",
     "@tailwindcss/cli": "^4.0.16",
     "@tailwindcss/postcss": "^4.0.12",
     "@tailwindcss/vite": "^4.0.16",
