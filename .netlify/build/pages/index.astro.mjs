@@ -7,6 +7,7 @@ import { $ as $$TicketPopup } from '../chunks/TicketPopup_D-3CqyKe.mjs';
 import '@astrojs/internal-helpers/path';
 import '@astrojs/internal-helpers/remote';
 import { $ as $$Image } from '../chunks/_astro_assets_D7j0ws8A.mjs';
+/* empty css                                 */
 export { renderers } from '../renderers.mjs';
 
 const $$Hero = createComponent(($$result, $$props, $$slots) => {
