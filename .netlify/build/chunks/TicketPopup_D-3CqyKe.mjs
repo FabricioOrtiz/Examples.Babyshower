@@ -1,0 +1,12 @@
+import { c as createComponent, m as maybeRenderHead, e as renderScript, a as renderTemplate } from './astro/server_CjbJd46K.mjs';
+import 'kleur/colors';
+import 'html-escaper';
+import 'clsx';
+
+const $$TicketPopup = createComponent(($$result, $$props, $$slots) => {
+  return renderTemplate`${maybeRenderHead()}<div id="ticket-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"> <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 max-h-[90vh] overflow-y-auto"> <div class="flex justify-between items-center mb-4"> <h3 class="text-2xl font-bold">Your Ticket Details</h3> <button id="close-popup" class="text-gray-500 hover:text-gray-700"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path> </svg> </button> </div> <form id="ticket-form" class="space-y-4"> <input type="hidden" id="ticket-id" name="ticketId"> <div class="space-y-2"> <label for="name" class="block font-medium">Name</label> <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" required> </div> <div class="space-y-2"> <label for="email" class="block font-medium">Email</label> <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" required> </div> <div class="space-y-2"> <label for="numberOfTickets" class="block font-medium">Number of Tickets</label> <input type="number" id="numberOfTickets" name="numberOfTickets" min="1" max="10" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" required> </div> <div class="pt-2"> <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+Confirm Ticket
+</button> </div> </form> </div> </div> ${renderScript($$result, "C:/Users/titoortizcr/Documents/GitHub/Examples.Babyshower/src/components/TicketPopup.astro?astro&type=script&index=0&lang.ts")}`;
+}, "C:/Users/titoortizcr/Documents/GitHub/Examples.Babyshower/src/components/TicketPopup.astro", void 0);
+
+export { $$TicketPopup as $ };
