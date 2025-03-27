@@ -2,6 +2,7 @@ import { c as createComponent, j as createAstro, b as addAttribute, l as renderH
 import 'kleur/colors';
 import 'html-escaper';
 import 'clsx';
+/* empty css                         */
 
 const $$Astro = createAstro();
 const $$Layout = createComponent(($$result, $$props, $$slots) => {

@@ -1,7 +1,7 @@
 import { c as createComponent, r as renderComponent, a as renderTemplate, d as defineScriptVars, m as maybeRenderHead } from '../chunks/astro/server_CjbJd46K.mjs';
 import 'kleur/colors';
 import 'html-escaper';
-import { $ as $$Layout } from '../chunks/Layout_DxuY1o6E.mjs';
+import { $ as $$Layout } from '../chunks/Layout_nEpLLzVs.mjs';
 import { $ as $$TicketPopup } from '../chunks/TicketPopup_D-3CqyKe.mjs';
 import { t as ticketTypes } from '../chunks/tickets_Dkd32I5E.mjs';
 export { renderers } from '../renderers.mjs';
