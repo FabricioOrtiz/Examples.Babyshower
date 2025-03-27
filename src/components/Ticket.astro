@@ -7,61 +7,7 @@ import { ticketTypes } from '../data/tickets.js';
 const tickets = ticketTypes;
 ---
 
-<section id="tickets" class="py-20 bg-gray-50">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-4">Get Your Tickets</h2>
-    <p class="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-      Choose the perfect ticket option for your festival experience. Early bird prices available for a limited time.
-    </p>
-    
-    <div class="grid md:grid-cols-3 gap-8">
-      {tickets.map(ticket => (
-        <div class={`bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105 ${ticket.featured ? 'ring-2 ring-purple-500 relative' : ''}`}>
-          {ticket.featured && (
-            <div class="absolute top-0 right-0 bg-purple-500 text-white py-1 px-3 text-sm font-medium">
-              MOST POPULAR
-            </div>
-          )}
-          
-          <div class="p-8">
-            <h3 class="text-2xl font-bold mb-2">{ticket.name}</h3>
-            <div class="flex items-baseline mb-4">
-              <span class="text-4xl font-extrabold">${ticket.price}</span>
-              <span class="text-gray-500 ml-1">USD</span>
-            </div>
-            <p class="text-gray-600 mb-6">{ticket.description}</p>
-            
-            <ul class="space-y-3 mb-8">
-              {ticket.features.map(feature => (
-                <li class="flex items-center">
-                  <svg class="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          <div class="p-6 bg-gray-50 border-t border-gray-100">
-            <button 
-              class={`buy-ticket-btn w-full py-3 px-6 rounded-lg font-bold transition-colors ${ticket.featured ? 'bg-purple-600 hover:bg-purple-700 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'}`}
-              data-ticket-id={ticket.id}
-            >
-              Buy Now
-            </button>
-          </div>
-        </div>
-      ))}
-    </div>
-    
-    <div class="mt-12 text-center">
-      <p class="text-gray-600">
-        Group discounts available for parties of 10 or more. <a href="#contact" class="text-purple-600 underline">Contact us</a> for details.
-      </p>
-    </div>
-  </div>
-</section>
+
 
 <TicketPopup />
 
