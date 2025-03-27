@@ -1,0 +1,243 @@
+---
+// Ticket component for purchasing concert tickets
+import TicketPopup from './TicketPopup.astro';
+import { ticketTypes } from '../data/tickets.js';
+
+// Get ticket data
+const tickets = ticketTypes;
+---
+
+<section id="tickets" class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-4">Get Your Tickets</h2>
+    <p class="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+      Choose the perfect ticket option for your festival experience. Early bird prices available for a limited time.
+    </p>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      {tickets.map(ticket => (
+        <div class={`bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105 ${ticket.featured ? 'ring-2 ring-purple-500 relative' : ''}`}>
+          {ticket.featured && (
+            <div class="absolute top-0 right-0 bg-purple-500 text-white py-1 px-3 text-sm font-medium">
+              MOST POPULAR
+            </div>
+          )}
+          
+          <div class="p-8">
+            <h3 class="text-2xl font-bold mb-2">{ticket.name}</h3>
+            <div class="flex items-baseline mb-4">
+              <span class="text-4xl font-extrabold">${ticket.price}</span>
+              <span class="text-gray-500 ml-1">USD</span>
+            </div>
+            <p class="text-gray-600 mb-6">{ticket.description}</p>
+            
+            <ul class="space-y-3 mb-8">
+              {ticket.features.map(feature => (
+                <li class="flex items-center">
+                  <svg class="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          <div class="p-6 bg-gray-50 border-t border-gray-100">
+            <button 
+              class={`buy-ticket-btn w-full py-3 px-6 rounded-lg font-bold transition-colors ${ticket.featured ? 'bg-purple-600 hover:bg-purple-700 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'}`}
+              data-ticket-id={ticket.id}
+            >
+              Buy Now
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="mt-12 text-center">
+      <p class="text-gray-600">
+        Group discounts available for parties of 10 or more. <a href="#contact" class="text-purple-600 underline">Contact us</a> for details.
+      </p>
+    </div>
+  </div>
+</section>
+
+<TicketPopup />
+
+<script>
+  // Client-side script for ticket popup functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const popup = document.getElementById('ticket-popup');
+    const closeBtn = document.getElementById('close-popup');
+    const ticketForm = document.getElementById('ticket-form');
+    const ticketIdInput = document.getElementById('ticket-id');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const numberOfTicketsInput = document.getElementById('numberOfTickets');
+    const buyButtons = document.querySelectorAll('.buy-ticket-btn');
+    
+    // Get ticket users from localStorage or use initial data
+    function getTicketUsers() {
+      const storedUsers = localStorage.getItem('ticketUsers');
+      return storedUsers ? JSON.parse(storedUsers) : [
+        { id: 1, name: "John Smith", email: "john@example.com", numberOfTickets: 2, ticketId: 1 },
+        { id: 2, name: "Sarah Johnson", email: "sarah@example.com", numberOfTickets: 4, ticketId: 2 },
+        { id: 3, name: "Michael Brown", email: "michael@example.com", numberOfTickets: 1, ticketId: 3 },
+        { id: 4, name: "Emma Wilson", email: "emma@example.com", numberOfTickets: 3, ticketId: 2 },
+        { id: 5, name: "David Lee", email: "david@example.com", numberOfTickets: 2, ticketId: 1 }
+      ];
+    }
+    
+    // Save ticket users to localStorage
+    function saveTicketUsers(users) {
+      localStorage.setItem('ticketUsers', JSON.stringify(users));
+      return users;
+    }
+    
+    // Get initial ticket users
+    let ticketUsersArray = getTicketUsers();
+    
+    // Check URL parameters on page load
+    function checkUrlParams() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const userId = urlParams.get('userId');
+      
+      if (userId) {
+        // Find the user in the tickets array
+        const user = ticketUsersArray.find(user => user.id.toString() === userId);
+        
+        if (user) {
+          // Populate the form with the user's data
+          openPopupWithData(user);
+        }
+      }
+    }
+    
+    // Run on page load
+    checkUrlParams();
+    
+    // Open popup with user data if available
+    function openPopupWithData(userData = null) {
+      // If user data is provided, populate the form
+      if (userData) {
+        ticketIdInput.value = userData.ticketId;
+        nameInput.value = userData.name;
+        emailInput.value = userData.email;
+        numberOfTicketsInput.value = userData.numberOfTickets;
+      } else {
+        // Clear the form if no user data
+        ticketForm.reset();
+      }
+      
+      // Show the popup
+      popup.classList.remove('hidden');
+      
+      // Focus on the first input
+      nameInput.focus();
+    }
+    
+    // Add click event listeners to all buy buttons
+    buyButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const ticketId = button.getAttribute('data-ticket-id');
+        ticketIdInput.value = ticketId;
+        
+        // Check if there's a user in the URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('userId');
+        
+        if (userId) {
+          const user = ticketUsersArray.find(user => user.id.toString() === userId);
+          if (user) {
+            openPopupWithData(user);
+          } else {
+            openPopupWithData();
+          }
+        } else {
+          openPopupWithData();
+        }
+      });
+    });
+    
+    // Close the popup when the close button is clicked
+    closeBtn.addEventListener('click', () => {
+      popup.classList.add('hidden');
+      
+      // Clear URL parameters if they exist
+      const url = new URL(window.location);
+      if (url.searchParams.has('userId')) {
+        url.searchParams.delete('userId');
+        window.history.replaceState({}, '', url);
+      }
+    });
+    
+    // Handle form submission
+    ticketForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const formData = {
+        ticketId: parseInt(ticketIdInput.value),
+        name: nameInput.value,
+        email: emailInput.value,
+        numberOfTickets: parseInt(numberOfTicketsInput.value)
+      };
+      
+      // Check if we're updating an existing user
+      const urlParams = new URLSearchParams(window.location.search);
+      const userId = urlParams.get('userId');
+      
+      if (userId) {
+        // Update existing user
+        const userIndex = ticketUsersArray.findIndex(user => user.id.toString() === userId);
+        
+        if (userIndex !== -1) {
+          ticketUsersArray[userIndex] = {
+            ...ticketUsersArray[userIndex],
+            ...formData
+          };
+          
+          saveTicketUsers(ticketUsersArray);
+          showSuccessMessage('Ticket updated successfully!');
+        }
+      } else {
+        // Add new user
+        const newUser = {
+          id: ticketUsersArray.length > 0 ? Math.max(...ticketUsersArray.map(u => u.id)) + 1 : 1,
+          ...formData
+        };
+        
+        ticketUsersArray.push(newUser);
+        saveTicketUsers(ticketUsersArray);
+        showSuccessMessage('Ticket booked successfully!');
+      }
+      
+      // Close the popup
+      popup.classList.add('hidden');
+      
+      // Clear URL parameters if they exist
+      const url = new URL(window.location);
+      if (url.searchParams.has('userId')) {
+        url.searchParams.delete('userId');
+        window.history.replaceState({}, '', url);
+      }
+    });
+    
+    // Function to show a success message
+    function showSuccessMessage(message) {
+      // Create a success message element
+      const successMessage = document.createElement('div');
+      successMessage.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+      successMessage.textContent = message;
+      
+      // Add to the DOM
+      document.body.appendChild(successMessage);
+      
+      // Remove after 3 seconds
+      setTimeout(() => {
+        successMessage.remove();
+      }, 3000);
+    }
+  });
+</script>
+

@@ -1,0 +1,43 @@
+---
+// Gallery component showing images from past events
+import { Image } from 'astro:assets';
+import threemonths from "../assets/3meses.jpg";
+import fourmonths from "../assets/4meses.jpg";
+import fivemonths from "../assets/5meses.jpg";
+
+
+---
+
+<section id="gallery" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-4">Gallery</h2>
+    <p class="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+      Relive the magic from our previous events. Get ready for an even more amazing experience this year!
+    </p>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow">
+        <Image src={threemonths} alt="A description of my image." class="w-full h-64 object-cover transition-transform hover:scale-105"/>
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow">
+        <Image src={fourmonths} alt="A description of my image." class="w-full h-64 object-cover transition-transform hover:scale-105" />
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow">
+        <Image src={fivemonths} alt="A description of my image." class="w-full h-64 object-cover transition-transform hover:scale-105"/>
+      </div>
+    </div>
+  
+    <div class="mt-12 text-center">
+      <a 
+        href="#" 
+        class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-800"
+      >
+        Pronto fotografías del evento...
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+

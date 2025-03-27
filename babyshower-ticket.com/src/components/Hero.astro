@@ -1,16 +1,64 @@
-<section class="bg-primary min-h-screen py-8">
-    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat blur-lg filter" 
-    style="background-image: url(https://r2.starticket.cr/cdn-cgi/image/width=1080,quality=80/user_content/event_images/5239-event_page-eb3afc5994098780c51cff5a9bd19e14.png);background-attachment: fixed;">
-        
-    </div>
-    <div class="backdrop-brightness-80 min-h-screen w-full bg-[#292728]/40 ">
+---
+// Hero component for the concert landing page
+---
 
-        <div class=" grid grid-cols-5 grid-rows-5 gap-4 max-w-5xl mx-auto">
-            <div class="col-span-2 row-span-5 bg-secudary aspect-video rounded-2xl">1</div>
-            <div class="col-span-3 row-span-3 col-start-3 bg-secudary rounded-2xl ">2</div>
-            <div class="col-span-3 row-span-2 col-start-3 row-start-4 bg-secudary rounded-2xl">3</div>
-        </div>
-        
+<section class="items-center justify-center text-white">
     
-    </div>
+    <div class="  z-0">
+        <img 
+          src="/invitation.svg?height=1080&width=1920" 
+          alt="Baby shower Amalia y Amanda" 
+          class="w-full h-full object-cover "
+        />
+      </div>
+      
+      <div class="relative z-10 text-center px-4 max-w-4xl mx-auto" style="display: none;">
+       
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="#tickets" 
+            class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full text-lg transition-colors"
+          >
+            Reservar
+          </a>
+          <button 
+        id="hero-get-tickets" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full text-lg transition-colors">
+            Get Tickets
+        </button>
+          
+        </div>
+       
+      </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const getTicketsBtn = document.getElementById('hero-get-tickets');
+          
+          if (getTicketsBtn) {
+            getTicketsBtn.addEventListener('click', () => {
+              // Get the popup element
+              const popup = document.getElementById('ticket-popup');
+              
+              if (popup) {
+                // Reset the form
+                const ticketForm = document.getElementById('ticket-form');
+                if (ticketForm) ticketForm.reset();
+                
+                // Set a default ticket ID (1 for Single Day Pass)
+                const ticketIdInput = document.getElementById('ticket-id');
+                if (ticketIdInput) ticketIdInput.value = "1";
+                
+                // Show the popup
+                popup.classList.remove('hidden');
+              } else {
+                // Fallback to scrolling if popup isn't available
+                document.querySelector('#tickets')?.scrollIntoView({ behavior: 'smooth' });
+              }
+            });
+          }
+        });
+      </script>
 </section>
+
+
+
+  

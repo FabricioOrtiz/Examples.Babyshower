@@ -1,0 +1,90 @@
+---
+// Simple admin login page
+import Layout from '../../layouts/Layout.astro';
+
+// In a real app, you would validate credentials against a database
+const adminCredentials = {
+  username: "admin",
+  password: "password123"
+};
+---
+
+<Layout title="Admin Login">
+  <section class="py-20 bg-gray-50 min-h-screen flex items-center">
+    <div class="container mx-auto px-4">
+      <div class="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden p-6">
+        <h1 class="text-2xl font-bold mb-6 text-center">Admin Login</h1>
+        
+        <form id="login-form" class="space-y-4">
+          <div class="space-y-2">
+            <label for="username" class="block font-medium">Username</label>
+            <input 
+              type="text" 
+              id="username" 
+              name="username" 
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              required
+            >
+          </div>
+          
+          <div class="space-y-2">
+            <label for="password" class="block font-medium">Password</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              required
+            >
+          </div>
+          
+          <div id="error-message" class="text-red-500 text-sm hidden">
+            Invalid username or password. Please try again.
+          </div>
+          
+          <div class="pt-2">
+            <button 
+              type="submit" 
+              class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+        
+        <div class="mt-4 text-center">
+          <a href="/" class="text-purple-600 hover:text-purple-800 text-sm">
+            Return to Homepage
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script define:vars={{ adminCredentials }}>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('login-form');
+      const errorMessage = document.getElementById('error-message');
+      
+      if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          const username = document.getElementById('username').value;
+          const password = document.getElementById('password').value;
+          
+          // Simple client-side validation (not secure for production)
+          if (username === adminCredentials.username && password === adminCredentials.password) {
+            // In a real app, you would set a secure session or token
+            // For this demo, we'll just redirect to the admin dashboard
+            window.location.href = '/admin/tickets';
+          } else {
+            // Show error message
+            errorMessage.classList.remove('hidden');
+          }
+        });
+      }
+    });
+  </script>
+</Layout>
+
