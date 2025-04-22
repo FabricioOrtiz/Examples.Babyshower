@@ -5,7 +5,7 @@
 <div id="ticket-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
   <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 max-h-[90vh] overflow-y-auto">
     <div class="flex justify-between items-center mb-4">
-      <h3 class="text-2xl font-bold">Your Ticket Details</h3>
+      <h3 class="text-2xl font-bold">Confirmacion de asistencia</h3>
       <button id="close-popup" class="text-gray-500 hover:text-gray-700">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -17,17 +17,32 @@
       <input type="hidden" id="ticket-id" name="ticketId">
       
       <div class="space-y-2">
-        <label for="name" class="block font-medium">Name</label>
+        
         <input 
+        style="display: none;"
           type="text" 
           id="name" 
           name="name" 
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
           required
         >
+
+        <h1 id="nameOfFamily" class="block font-medium"></h1>
+        <p>Para asegurar que todos podamos disfrutar de una celebración cómoda y agradable, 
+          hemos establecido los siguientes cupos:</p>
+        <ul>
+            <li id="numberOfTickets" class="block font-medium">
+            </li>
+        </ul>
+        <p>
+            Por favor, confirma tu asistencia y el número de personas que te acompañarán, 
+            para que podamos organizar todo de la mejor manera posible.
+        </p>
+        <p>Esperamos que puedas acompañarnos en esta celebración llena de amor y alegría. ¡No puedo esperar a verte allí!</p>
+        <p>Con cariño, Familia Ortiz Garro</p>
       </div>
       
-      <div class="space-y-2">
+      <div class="space-y-2" style="display: none;">
         <label for="email" class="block font-medium">Email</label>
         <input 
           type="email" 
@@ -38,12 +53,13 @@
         >
       </div>
       
-      <div class="space-y-2">
-        <label for="numberOfTickets" class="block font-medium">Number of Tickets</label>
+      <div class="space-y-2" style="display: none">
+        <label for="numberOfTicketsInput" class="block font-medium"></label>
         <input 
+          
           type="number" 
-          id="numberOfTickets" 
-          name="numberOfTickets" 
+          id="numberOfTicketsInput" 
+          name="numberOfTicketsInput" 
           min="1" 
           max="10" 
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -54,9 +70,9 @@
       <div class="pt-2">
         <button 
           type="submit" 
-          class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+          class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
         >
-          Confirm Ticket
+          Confirmar asistencia
         </button>
       </div>
     </form>

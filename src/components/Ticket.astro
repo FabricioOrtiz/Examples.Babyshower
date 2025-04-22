@@ -12,15 +12,23 @@ const tickets = ticketTypes;
 <TicketPopup />
 
 <script>
+  type User = {
+  ticketId: number;
+  name: string;
+  email: string;
+  numberOfTickets: number;
+};
   // Client-side script for ticket popup functionality
   document.addEventListener('DOMContentLoaded', () => {
     const popup = document.getElementById('ticket-popup');
     const closeBtn = document.getElementById('close-popup');
     const ticketForm = document.getElementById('ticket-form');
-    const ticketIdInput = document.getElementById('ticket-id');
+    const ticketIdInput = document.getElementById('ticket-id') as HTMLElement;
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
-    const numberOfTicketsInput = document.getElementById('numberOfTickets');
+    const numberOfTicketsInput = document.getElementById('numberOfTicketsInput') ;
+    const numberOfTickets = document.getElementById('numberOfTickets') as HTMLLIElement;
+    const nameOfFamily = document.getElementById('nameOfFamily') as HTMLTitleElement;
     const buyButtons = document.querySelectorAll('.buy-ticket-btn');
     
     // Get ticket users from localStorage or use initial data
@@ -36,7 +44,7 @@ const tickets = ticketTypes;
     }
     
     // Save ticket users to localStorage
-    function saveTicketUsers(users) {
+    function saveTicketUsers(users: User) {
       localStorage.setItem('ticketUsers', JSON.stringify(users));
       return users;
     }
@@ -64,13 +72,15 @@ const tickets = ticketTypes;
     checkUrlParams();
     
     // Open popup with user data if available
-    function openPopupWithData(userData = null) {
+    function openPopupWithData(userData: User){
       // If user data is provided, populate the form
       if (userData) {
         ticketIdInput.value = userData.ticketId;
         nameInput.value = userData.name;
         emailInput.value = userData.email;
+        numberOfTickets.textContent = "Cantidad invitados: "+userData.numberOfTickets;
         numberOfTicketsInput.value = userData.numberOfTickets;
+        nameOfFamily.textContent = "Querid@s invitados "+ userData.name;
       } else {
         // Clear the form if no user data
         ticketForm.reset();
@@ -144,7 +154,7 @@ const tickets = ticketTypes;
           };
           
           saveTicketUsers(ticketUsersArray);
-          showSuccessMessage('Ticket updated successfully!');
+          showSuccessMessage('Su confirmación ha sido realizada con éxito!');
         }
       } else {
         // Add new user
