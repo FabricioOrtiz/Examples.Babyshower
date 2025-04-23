@@ -34,7 +34,7 @@ const tickets = ticketTypes;
     // Get ticket users from localStorage or use initial data
     function getTicketUsers() {
       const storedUsers = localStorage.getItem('ticketUsers');
-      return storedUsers ? JSON.parse(storedUsers) : [
+      return  [
       { id: 1, name: "Familia Ortiz Alfaro", email: "test@test.com", numberOfTickets: 4, ticketId: 1 },
         { id: 2, name: "Familia Quesada Alfaro", email: "test@test.com", numberOfTickets: 8, ticketId: 1 },
         { id: 3, name: "Familia Ramírez Alfaro", email: "test@test.com", numberOfTickets: 6, ticketId: 1 },
