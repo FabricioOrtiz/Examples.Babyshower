@@ -23,23 +23,35 @@ const tickets = ticketTypes;
     const popup = document.getElementById('ticket-popup');
     const closeBtn = document.getElementById('close-popup');
     const ticketForm = document.getElementById('ticket-form');
-    const ticketIdInput = document.getElementById('ticket-id') as HTMLElement;
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const numberOfTicketsInput = document.getElementById('numberOfTicketsInput') ;
+    const ticketIdInput = document.getElementById('ticket-id') as HTMLInputElement;
+    const nameInput = document.getElementById('name') as HTMLInputElement | null;
+    const emailInput = document.getElementById('email') as HTMLInputElement | null;
+    const numberOfTicketsInput = document.getElementById('numberOfTicketsInput') as HTMLInputElement | null;
     const numberOfTickets = document.getElementById('numberOfTickets') as HTMLLIElement;
-    const nameOfFamily = document.getElementById('nameOfFamily') as HTMLTitleElement;
+    const nameOfFamily = document.getElementById('nameOfFamily') as HTMLElement;
     const buyButtons = document.querySelectorAll('.buy-ticket-btn');
     
     // Get ticket users from localStorage or use initial data
     function getTicketUsers() {
       const storedUsers = localStorage.getItem('ticketUsers');
       return storedUsers ? JSON.parse(storedUsers) : [
-        { id: 1, name: "John Smith", email: "john@example.com", numberOfTickets: 2, ticketId: 1 },
-        { id: 2, name: "Sarah Johnson", email: "sarah@example.com", numberOfTickets: 4, ticketId: 2 },
-        { id: 3, name: "Michael Brown", email: "michael@example.com", numberOfTickets: 1, ticketId: 3 },
-        { id: 4, name: "Emma Wilson", email: "emma@example.com", numberOfTickets: 3, ticketId: 2 },
-        { id: 5, name: "David Lee", email: "david@example.com", numberOfTickets: 2, ticketId: 1 }
+      { id: 1, name: "Familia Ortiz Alfaro", email: "N/a", numberOfTickets: 4, ticketId: 1 },
+        { id: 2, name: "Familia Quesada Alfaro", email: "N/a", numberOfTickets: 8, ticketId: 1 },
+        { id: 3, name: "Familia Ramírez Alfaro", email: "N/a", numberOfTickets: 6, ticketId: 1 },
+        { id: 4, name: "Familia Córdoba Alfaro ", email: "N/a", numberOfTickets: 3, ticketId: 1 },
+        { id: 5, name: "Familia Alfaro Ramírez", email: "N/a", numberOfTickets: 3, ticketId: 1 },
+        { id: 6, name: "Leo y Laura", email: "N/a", numberOfTickets: 2, ticketId: 1 },
+        { id: 7, name: "Familia Dunia", email: "N/a", numberOfTickets: 5, ticketId: 1 },
+        { id: 8, name: "Familia Ortiz (Santos) ", email: "N/a", numberOfTickets: 4, ticketId: 1 },
+        { id: 9, name: "Abuelo Lalo y Abuela Odili", email: "N/a", numberOfTickets: 2, ticketId: 1 },
+        { id: 10, name: "Familia Garro", email: "N/a", numberOfTickets: 14, ticketId: 1 },
+
+        { id: 11, name: "Johnny y Yasmin", email: "N/a", numberOfTickets: 3, ticketId: 1 },
+        { id: 12, name: "Aura y Mary Fer", email: "N/a", numberOfTickets: 2, ticketId: 1 },
+        { id: 13, name: "Will Y Vivi ", email: "N/a", numberOfTickets: 4, ticketId: 1 },
+        { id: 14, name: "Familia Katy", email: "N/a", numberOfTickets: 2, ticketId: 1 },
+        { id: 15, name: "Anthony y Gene", email: "N/a", numberOfTickets: 2, ticketId: 1 },
+        { id: 16, name: "Amig@", email: "N/a", numberOfTickets: 1, ticketId: 1 }
       ];
     }
     
